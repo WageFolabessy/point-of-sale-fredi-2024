@@ -1,0 +1,36 @@
+.calculator button {
+  height: 80px;
+  width: 100%;
+  font-size: 1.5rem;
+}
+.calculator .row {
+  margin-bottom: 0.5rem;
+}
+.calculator {
+  max-width: 500px; /* Menyesuaikan max-width agar lebih lebar */
+  margin: auto;
+}
+.result {
+  height: 80px;
+  font-size: 1.5rem;
+  width: 100%; /* Menyesuaikan lebar 100% */
+}
+#calculator-screen {
+  width: 100%; /* Menyesuaikan lebar 100% */
+}
+#calculator-result {
+  width: 100%; /* Menyesuaikan lebar 100% */
+}
+
+.btn-orange{
+  background-color: #fd7e14;
+}
+.btn-green{
+  background-color: #198754;
+}
+.btn-pink{
+  background-color: #d63384;
+}
+.btn-yellow{
+  background-color: #ffc107;
+}
