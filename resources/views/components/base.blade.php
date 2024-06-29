@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Point of Sale @yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('assets/plugins/adminlte/img/AdminLTELogo.png') }}" type="image/x-icon">
@@ -42,6 +43,7 @@
     <script src="{{ asset('assets/plugins/adminlte/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/plugins/adminlte/js/demo.js') }}"></script>
+    <script src="{{ asset('js/keluar.js') }}"></script>
     @yield('script')
 </body>
 

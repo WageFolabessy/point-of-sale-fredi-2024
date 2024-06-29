@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{{ asset('assets/plugins/adminlte/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: 0.8" />
+        <img src="{{ asset('assets/plugins/adminlte/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" style="opacity: 0.8" />
         <span class="brand-text font-weight-light">Henk</span>
     </a>
 
@@ -12,10 +12,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('assets/plugins/adminlte/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image" />
+                <img src="{{ asset('assets/plugins/adminlte/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                    alt="User Image" />
             </div>
             <div class="info">
-                <a href="#" class="d-block">Fredi Wijaya</a>
+                <a href="#" class="d-block">{{ Auth::user()->nama }}</a>
             </div>
         </div>
 
@@ -117,13 +118,15 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('kalender') }}" class="nav-link {{ request()->is('kalender') ? 'active' : '' }}">
+                            <a href="{{ route('kalender') }}"
+                                class="nav-link {{ request()->is('kalender') ? 'active' : '' }}">
                                 <i class="ion ion-calendar nav-icon"></i>
                                 <p>Kalender</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('kalkulator') }}" class="nav-link {{ request()->is('kalkulator') ? 'active' : '' }}">
+                            <a href="{{ route('kalkulator') }}"
+                                class="nav-link {{ request()->is('kalkulator') ? 'active' : '' }}">
                                 <i class="ion ion-calculator nav-icon"></i>
                                 <p>Kalkulator</p>
                             </a>
@@ -145,8 +148,9 @@
                                 <p>Kelola Akun</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="layout/top-nav.html" class="nav-link">
+                            <a href="#" class="nav-link" id="tombol-keluar">
                                 <i class="ion ion-log-out nav-icon"></i>
                                 <p>keluar</p>
                             </a>
