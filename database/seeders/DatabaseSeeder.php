@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            'username' => fake()->userName(),
-            'nama' => fake()->name(),
+            'username' => 'username',
+            'nama' => 'Nama Pengguna',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
