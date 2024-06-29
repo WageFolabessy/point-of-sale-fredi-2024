@@ -43,8 +43,31 @@
                         <li class="nav-item">
                             <a href="./index.html" class="nav-link">
                                 <i class="fas fa-cash-register nav-icon"></i>
-                                <p>Kasir</p>
+                                <p>
+                                    Kasir
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Service</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Aksesoris</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pulsa / Paket Data</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="./index.html" class="nav-link">
@@ -69,25 +92,25 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Semua</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Service</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Aksesoris</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p>Pulsa / Paket Data</p>
                                     </a>
                                 </li>
@@ -119,7 +142,7 @@
                         <li class="nav-item">
                             <a href="layout/top-nav.html" class="nav-link">
                                 <i class="ion ion-settings nav-icon"></i>
-                                <p>Kelola Admin</p>
+                                <p>Kelola Akun</p>
                             </a>
                         </li>
                         <li class="nav-item">
