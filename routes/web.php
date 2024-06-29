@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('pages.index');
 });
 
+Route::get('/masuk', function () {
+    return view('pages.login');
+});
+
 Route::get('/kalender', function () {
     return view('pages.kalender');
 })->name('kalender');
