@@ -143,7 +143,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="layout/top-nav.html" class="nav-link">
+                            <a href="{{ route('kelola_akun') }}" class="nav-link {{ request()->is('kelola_akun') ? 'active' : '' }}">
                                 <i class="ion ion-settings nav-icon"></i>
                                 <p>Kelola Akun</p>
                             </a>
