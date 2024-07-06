@@ -42,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-cash-register nav-icon"></i>
                                 <p>
                                     Kasir
@@ -63,8 +63,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{ route('kasir_pulsa_paket') }}" class="nav-link {{ request()->is('kasir_pulsa_paket') ? 'active' : '' }}">
+                                        <i class="far fa-{{ request()->is('kasir_pulsa_paket') ? 'dot-' : '' }}circle nav-icon"></i>
                                         <p>Pulsa / Paket Data</p>
                                     </a>
                                 </li>

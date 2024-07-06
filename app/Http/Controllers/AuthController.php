@@ -38,7 +38,7 @@ class AuthController extends Controller
 
     public function index()
     {
-        $user = User::all();
+        $user = User::orderBy('created_at', 'desc')->get();
 
         return DataTables::of($user)
             ->addIndexColumn()
@@ -84,7 +84,6 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         return response()->json(['message' => 'Akun berhasil ditambahkan.']);
-
     }
 
     public function edit($id)
