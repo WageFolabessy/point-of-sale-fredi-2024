@@ -27,8 +27,9 @@ $(document).on("click", "#tambah-akun", function (e) {
         success: function (response) {
             $("#modal-tambah-akun").modal("hide");
 
-            // $(".toast-body").text("Dosen berhasil ditambahkan");
-            // $(".toast").toast("show");
+            $(".toastrDefaultSuccess", function () {
+                toastr.success(response.message);
+            });
 
             clearForm();
             $("#tabelAkun").DataTable().ajax.reload();
@@ -53,13 +54,68 @@ $(document).on("click", "#tombol-hapus", function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                // $(".toast-body").text("Dosen berhasil dihapus");
-                // $(".toast").toast("show");
+                $(".toastrDefaultSuccess", function () {
+                    toastr.success(response.message);
+                });
                 $("#tabelAkun").DataTable().ajax.reload();
             },
         });
     }
 });
+
+$(document).on("click", "#tombol-edit", function (e) {
+    let id = $(this).data("id");
+
+    $.ajax({
+        url: "/akun/edit_akun/" + id,
+        type: "GET",
+        success: function (response) {
+            // Set data akun
+            const { nama, username, is_admin } = response;
+
+            $("#inputNamaEdit").val(nama);
+            $("#inputusernameEdit").val(username);
+            $("#input_isAdminEdit").val(is_admin);
+
+            // Menambahkan event handler
+            $("#edit-akun")
+                .off("click")
+                .on("click", function () {
+                    updateAkun(id);
+                });
+        },
+    });
+});
+
+function updateAkun(id) {
+    let data = {
+        _token: $('meta[name="csrf-token"]').attr("content"),
+        nama: $("#inputNamaEdit").val(),
+        username: $("#inputusernameEdit").val(),
+        is_admin: $("#input_isAdminEdit").val(),
+    };
+
+    $.ajax({
+        url: "/akun/update_akun/" + id,
+        type: "POST",
+        data: data,
+        success: function (response) {
+            $("#modal-edit-akun").modal("hide");
+            $("#tabelAkun").DataTable().ajax.reload();
+            $(".toast").toast("show");
+            $(".toastrDefaultSuccess", function () {
+                toastr.success(response.message);
+            });
+        },
+        error: function (response) {
+            clearError();
+            $("#namaErrorEdit").text(response.responseJSON.error.nama);
+            $("#usernameErrorEdit").text(response.responseJSON.error.username);
+            $("#isAdminErrorEdit").text(response.responseJSON.error.is_admin);
+            $("#passwordErrorEdit").text(response.responseJSON.error.password);
+        },
+    });
+}
 
 function clearForm() {
     $("input[name=nama]").val("");
@@ -72,4 +128,11 @@ function clearForm() {
     $("#usernameError").text("");
     $("#isAdminError").text("");
     $("#passwordError").text("");
+}
+
+function clearError() {
+    $("#namaErrorEdit").text("");
+    $("#usernameErrorEdit").text("");
+    $("#isAdminErrorEdit").text("");
+    $("#passwordErrorEdit").text("");
 }

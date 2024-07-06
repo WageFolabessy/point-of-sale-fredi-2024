@@ -83,8 +83,44 @@ class AuthController extends Controller
         $user->is_admin = $request->is_admin;
         $user->password = Hash::make($request->password);
         $user->save();
-        return response()->json(['success' => 'Akun berhasil ditambahkan.']);
+        return response()->json(['message' => 'Akun berhasil ditambahkan.']);
 
+    }
+
+    public function edit($id)
+    {
+        $data = User::findOrFail($id);
+        return response()->json($data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'username' => 'required|unique:users,username,' . $id,
+            'is_admin' => 'required',
+            'password' => 'nullable',
+        ], [
+            'nama.required' => 'Nama harus diisi',
+            'username.required' => 'Username harus diisi',
+            'username.unique' => 'Username sudah digunakan',
+            'is_admin.required' => 'Peran harus diisi',
+            'password.nullable' => 'Password harus diisi',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $user = User::find($id);
+        $user->nama = $request->nama;
+        $user->username = $request->username;
+        $user->is_admin = $request->is_admin;
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return response()->json(['message' => 'Profil User berhasil diperbaharui.']);
     }
 
     public function destroy($id)
@@ -93,7 +129,7 @@ class AuthController extends Controller
         $user->delete();
 
         return response()->json([
-            'success' => 'Akun berhasil dihapus'
+            'message' => 'Akun berhasil dihapus'
         ]);
     }
 }

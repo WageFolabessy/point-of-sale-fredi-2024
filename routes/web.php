@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/logout', 'logout')->name('logout');
         Route::get('/akun/datatables/', 'index');
         Route::post('/akun/tambah_akun', 'store');
+        Route::get('/akun/edit_akun/{id}', 'edit');
+        Route::post('/akun/update_akun/{id}', 'update');
         Route::delete('/akun/hapus_akun/{id}', 'destroy');
     });
 
