@@ -44,6 +44,7 @@
                                 <th>Harga Jual</th>
                                 <th>Profit</th>
                                 <th>Keterangan</th>
+                                <th>Kasir</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

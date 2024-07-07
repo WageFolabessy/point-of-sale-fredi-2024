@@ -54,6 +54,7 @@ class KasirPulsaPaketController extends Controller
         $data->harga_beli = $request->harga_beli;
         $data->harga_jual = $request->harga_jual;
         $data->keterangan = $request->keterangan;
+        $data->nama_kasir = Auth::user()->nama;
         $data->save();
         return response()->json(['message' => 'Transaksi berhasil ditambahkan.']);
     }

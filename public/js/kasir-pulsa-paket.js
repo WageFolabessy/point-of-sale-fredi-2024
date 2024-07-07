@@ -10,6 +10,7 @@ $("#tabelKasirPulsaPaket").DataTable({
         { data: "harga_jual", name: "harga_jual" },
         { data: "profit", name: "profit" },
         { data: "keterangan", name: "keterangan" },
+        { data: "nama_kasir", name: "nama_kasir" },
         { data: "aksi", name: "aksi", orderable: false, searchable: false },
     ],
 });

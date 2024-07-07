@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('harga_jual');
             $table->integer('profit');
             $table->text('keterangan')->nullable();
+            $table->string('nama_kasir');
             $table->timestamps();
         });
     }
