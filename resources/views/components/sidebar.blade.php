@@ -110,8 +110,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{ route('laporan_pulsa_paket') }}" class="nav-link {{ request()->is('laporan_pulsa_paket') ? 'active' : '' }}">
+                                        <i class="far fa-{{ request()->is('laporan_pulsa_paket') ? 'dot-' : '' }}circle nav-icon"></i>
                                         <p>Pulsa / Paket Data</p>
                                     </a>
                                 </li>

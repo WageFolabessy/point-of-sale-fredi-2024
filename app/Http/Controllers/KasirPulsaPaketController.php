@@ -37,10 +37,6 @@ class KasirPulsaPaketController extends Controller
             ->make(true);
     }
 
-
-
-
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
