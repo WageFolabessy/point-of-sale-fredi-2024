@@ -21,7 +21,7 @@
     </section>
     <section class="content">
         <div class="toastrDefaultSuccess"></div>
-        <h3 class="text-center">Transaksi Hari {{ tanggal_indonesia(date('Y-m-d')) }}</h3>
+        <h3 class="text-center" id="keteranganTanggal">Transaksi Hari Ini</h3>
         <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#modal-tambah-transaksi">
             <span class="icon text-white-50">
                 <i class="fas fa-plus"></i>

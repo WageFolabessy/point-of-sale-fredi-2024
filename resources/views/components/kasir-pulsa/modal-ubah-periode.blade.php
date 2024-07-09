@@ -9,10 +9,9 @@
             </div>
             <div class="modal-body">
                 <div class="card p-3 mb-3">
-                    <div id="nomorHPError" class="text-danger"></div>
                     <div class="input-group date mb-3" id="tanggal_transaksi" data-target-input="nearest">
                         <span class="input-group-text" id="nomor_hp">Tanggal Transaksi</span>
-                        <input type="text" class="form-control datetimepicker-input" data-target="#tanggal_transaksi"/>
+                        <input type="text" class="form-control datetimepicker-input" data-target="#tanggal_transaksi" value="{{ \Carbon\Carbon::today()->format('m/d/Y') }}"/>
                         <div class="input-group-append" data-target="#tanggal_transaksi" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -24,8 +23,5 @@
                 <button type="button" class="btn btn-primary" id="ubah-periode-transaksi">Ubah Periode Transaksi</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->

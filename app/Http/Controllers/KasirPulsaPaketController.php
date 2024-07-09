@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class KasirPulsaPaketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $today = Carbon::today();
+        $date = $request->get('date', Carbon::today()->toDateString());
 
-        $data = KasirPulsaPaket::whereDate('created_at', $today)
+        $data = KasirPulsaPaket::whereDate('created_at', $date)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -35,6 +36,10 @@ class KasirPulsaPaketController extends Controller
             })
             ->make(true);
     }
+
+
+
+
 
     public function store(Request $request)
     {

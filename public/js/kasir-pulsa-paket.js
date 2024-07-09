@@ -1,23 +1,49 @@
-// Inisialisasi DataTable
-$("#tabelKasirPulsaPaket").DataTable({
-    processing: false,
-    serverSide: true,
-    ajax: '/kasir_pulsa_paket/datatables/',
-    columns: [
-        { data: "DT_RowIndex", name: "DT_RowIndex" },
-        { data: "nomor_hp", name: "nomor_hp" },
-        { data: "harga_beli", name: "harga_beli" },
-        { data: "harga_jual", name: "harga_jual" },
-        { data: "profit", name: "profit" },
-        { data: "keterangan", name: "keterangan" },
-        { data: "nama_kasir", name: "nama_kasir" },
-        { data: "aksi", name: "aksi", orderable: false, searchable: false },
-    ],
-});
+$(document).ready(function () {
+    let defaultDate = moment().format("YYYY-MM-DD"); // Tanggal default adalah hari ini
 
-//Date picker
-$('#tanggal_transaksi').datetimepicker({
-    format: 'L'
+    let table = $("#tabelKasirPulsaPaket").DataTable({
+        processing: false,
+        serverSide: true,
+        ajax: {
+            url: "/kasir_pulsa_paket/datatables/",
+            data: function (d) {
+                let selectedDate = $("#tanggal_transaksi input").val();
+                if (!selectedDate) {
+                    selectedDate = defaultDate; // Jika tanggal tidak dipilih, gunakan defaultDate
+                }
+                let formattedDate = moment(selectedDate, "MM/DD/YYYY").format(
+                    "YYYY-MM-DD"
+                );
+                d.date = formattedDate;
+
+                let today = moment().format('YYYY-MM-DD');
+                if (formattedDate === today) {
+                    $('#keteranganTanggal').text('Transaksi Hari Ini');
+                } else {
+                    $('#keteranganTanggal').text('Transaksi Hari ' + tanggal_indonesia(formattedDate));
+                }
+            },
+        },
+        columns: [
+            { data: "DT_RowIndex", name: "DT_RowIndex" },
+            { data: "nomor_hp", name: "nomor_hp" },
+            { data: "harga_beli", name: "harga_beli" },
+            { data: "harga_jual", name: "harga_jual" },
+            { data: "profit", name: "profit" },
+            { data: "keterangan", name: "keterangan" },
+            { data: "nama_kasir", name: "nama_kasir" },
+            { data: "aksi", name: "aksi", orderable: false, searchable: false },
+        ],
+    });
+
+    $("#tanggal_transaksi").datetimepicker({
+        format: "L",
+    });
+
+    $("#ubah-periode-transaksi").click(function () {
+        table.ajax.reload();
+        $("#modal-periode-transaksi").modal("hide");
+    });
 });
 
 $(document).on("click", "#tambah-transaksi", function (e) {
@@ -101,9 +127,15 @@ function updateTransaksi(id) {
         error: function (response) {
             clearError();
             $("#nomorHPErrorEdit").text(response.responseJSON.error.nomor_hp);
-            $("#hargaBeliErrorEdit").text(response.responseJSON.error.harga_beli);
-            $("#hargaJualErrorEdit").text(response.responseJSON.error.harga_jual);
-            $("#keteranganErrorEdit").text(response.responseJSON.error.keterangan);
+            $("#hargaBeliErrorEdit").text(
+                response.responseJSON.error.harga_beli
+            );
+            $("#hargaJualErrorEdit").text(
+                response.responseJSON.error.harga_jual
+            );
+            $("#keteranganErrorEdit").text(
+                response.responseJSON.error.keterangan
+            );
         },
     });
 }
@@ -146,3 +178,28 @@ function clearError() {
     $("#hargaJualErrorEdit").text("");
     $("#keteranganErrorEdit").text("");
 }
+
+function tanggal_indonesia(tgl, tampil_hari = true) {
+    const nama_hari = [
+        'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu'
+    ];
+    const nama_bulan = [
+        '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+
+    const tahun = tgl.substring(0, 4);
+    const bulan = nama_bulan[parseInt(tgl.substring(5, 7))];
+    const tanggal = tgl.substring(8, 10);
+    let text = '';
+
+    if (tampil_hari) {
+        const urutan_hari = new Date(tahun, parseInt(tgl.substring(5, 7)) - 1, tanggal).getDay();
+        const hari = nama_hari[urutan_hari];
+        text += `${hari}, ${tanggal} ${bulan} ${tahun}`;
+    } else {
+        text += `${tanggal} ${bulan} ${tahun}`;
+    }
+
+    return text;
+}
+
