@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class KasirPulsaPaketController extends Controller
 {
     public function index()
     {
-        $data = KasirPulsaPaket::orderBy('created_at', 'desc')->get();
+        $today = Carbon::today();
+
+        $data = KasirPulsaPaket::whereDate('created_at', $today)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return DataTables::of($data)
             ->addIndexColumn()

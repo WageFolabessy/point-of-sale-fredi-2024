@@ -5,6 +5,7 @@
 @section('stylesheet')
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/adminlte/css/toastr.min.css') }}">
+    <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"></script>
 @endsection
 @section('content')
     <!-- Content Header (Page header) -->
@@ -20,13 +21,21 @@
     </section>
     <section class="content">
         <div class="toastrDefaultSuccess"></div>
+        <h3 class="text-center">Transaksi Hari {{ tanggal_indonesia(date('Y-m-d')) }}</h3>
         <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#modal-tambah-transaksi">
             <span class="icon text-white-50">
                 <i class="fas fa-plus"></i>
             </span>
             <span class="text"> Tambah Transaksi</span>
         </button>
+        <button type="button" class="btn btn-info mt-3 mb-3" data-toggle="modal" data-target="#modal-periode-transaksi">
+            <span class="icon text-white-50">
+                <i class="fas fa-calendar"></i>
+            </span>
+            <span class="text"> Ubah Periode Transaksi</span>
+        </button>
         @include('components.kasir-pulsa.modal-tambah-transaksi')
+        @include('components.kasir-pulsa.modal-ubah-periode')
         @include('components.kasir-pulsa.modal-edit-transaksi')
         <div class="container-fluid">
             <div class="row">
@@ -58,5 +67,7 @@
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/adminlte/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('js/kasir-pulsa-paket.js') }}"></script>
 @endsection

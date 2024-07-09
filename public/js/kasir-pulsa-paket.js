@@ -15,6 +15,11 @@ $("#tabelKasirPulsaPaket").DataTable({
     ],
 });
 
+//Date picker
+$('#tanggal_transaksi').datetimepicker({
+    format: 'L'
+});
+
 $(document).on("click", "#tambah-transaksi", function (e) {
     e.preventDefault();
     $.ajax({
