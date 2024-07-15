@@ -53,7 +53,7 @@
 </head>
 
 <body>
-    <h3 class="text-center">Laporan Pendapatan</h3>
+    <h3 class="text-center">Laporan Pendapatan Pulsa/Paket</h3>
     <h4 class="text-center">{{ tanggal_indonesia($startDate, false) }} s/d {{ tanggal_indonesia($endDate, false) }}</h4>
 
     <table class="table table-striped">
