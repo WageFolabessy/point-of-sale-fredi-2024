@@ -71,7 +71,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
                                 <i class="fas fa-cube nav-icon"></i>
                                 <p>Kategori</p>
                             </a>
