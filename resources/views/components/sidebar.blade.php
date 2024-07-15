@@ -73,13 +73,13 @@
                         <li class="nav-item">
                             <a href="./index.html" class="nav-link">
                                 <i class="fas fa-cube nav-icon"></i>
-                                <p>Produk</p>
+                                <p>Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="./index.html" class="nav-link">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>Stok</p>
+                                <i class="fas fa-cubes nav-icon"></i>
+                                <p>Produk</p>
                             </a>
                         </li>
                         <li class="nav-item">
