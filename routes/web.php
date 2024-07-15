@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(LaporanPulsaPaket::class)->group(function () {
         Route::get('/laporan_pulsa_paket/datatables/', 'index');
+        Route::get('/laporan_pulsa_paket/pdf/{startDate}/{endDate}', 'generatePdf')->name('pulsa_paket_pdf');
     });
 
 });

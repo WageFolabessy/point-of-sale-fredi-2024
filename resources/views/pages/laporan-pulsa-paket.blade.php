@@ -30,12 +30,14 @@
             </span>
             <span class="text"> Ubah Periode Laporan</span>
         </button>
-        <button type="button" class="btn btn-danger mt-3 mb-3" id="tombol-pdf">
+        <a type="button" href="" class="btn btn-danger mt-3 mb-3" id="tombol-pdf"
+            data-url="{{ route('pulsa_paket_pdf', ['startDate' => 'startDatePlaceholder', 'endDate' => 'endDatePlaceholder']) }}">
             <span class="icon text-white-50">
                 <i class="fas fa-file-pdf"></i>
             </span>
             <span class="text"> Export PDF</span>
-        </button>
+        </a>
+
         @include('components.laporan-pulsa-paket.modal-ubah-periode')
         <div class="container-fluid">
             <div class="row">

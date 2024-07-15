@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\KasirPulsaPaket;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\Facades\DataTables;
-use PhpOffice\PhpSpreadsheet\Writer\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LaporanPulsaPaket extends Controller
 {
@@ -17,7 +17,7 @@ class LaporanPulsaPaket extends Controller
 
         $data = KasirPulsaPaket::whereDate('created_at', '>=', $startDate)
             ->whereDate('created_at', '<=', $endDate)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         $totalProfit = $data->sum('profit');
@@ -42,5 +42,23 @@ class LaporanPulsaPaket extends Controller
             ->with('totalHargaBeli', format_uang($totalHargaBeli))
             ->with('totalHargaJual', format_uang($totalHargaJual))
             ->make(true);
+    }
+
+    public function generatePdf($startDate, $endDate)
+    {
+        $data = KasirPulsaPaket::whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $totalProfit = $data->sum('profit');
+        $totalHargaBeli = $data->sum('harga_beli');
+        $totalHargaJual = $data->sum('harga_jual');
+
+        $pdf = PDF::loadView('pages.laporan.laporan-pdf-pulsa-paket', compact('data', 'totalProfit', 'totalHargaBeli', 'totalHargaJual', 'startDate', 'endDate'))
+            ->setPaper('a4', 'landscape')
+            ->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->stream('laporan_pulsa_paket dari ' . tanggal_indonesia($startDate, false) . ' s/d ' . tanggal_indonesia($endDate, false));
     }
 }

@@ -60,11 +60,32 @@ $(document).ready(function () {
                     tanggal_indonesia(endDate, false)
             );
         }
+
+        // Update tombol PDF href
+        let startDateFormatted = moment(startDate, "MM/DD/YYYY").format(
+            "YYYY-MM-DD"
+        );
+        let endDateFormatted = moment(endDate, "MM/DD/YYYY").format(
+            "YYYY-MM-DD"
+        );
+        let pdfUrl = $("#tombol-pdf").data("url");
+        pdfUrl = pdfUrl
+            .replace("startDatePlaceholder", startDateFormatted)
+            .replace("endDatePlaceholder", endDateFormatted);
+        $("#tombol-pdf").attr("href", pdfUrl);
     });
 
     // Set default keteranganTanggal saat halaman dimuat
     let today = moment().format("MM/DD/YYYY");
     $("#keteranganTanggal").text("Laporan Hari Ini");
+
+    // Set default href for PDF button
+    let todayFormatted = moment(today, "MM/DD/YYYY").format("YYYY-MM-DD");
+    let defaultPdfUrl = $("#tombol-pdf").data("url");
+    defaultPdfUrl = defaultPdfUrl
+        .replace("startDatePlaceholder", todayFormatted)
+        .replace("endDatePlaceholder", todayFormatted);
+    $("#tombol-pdf").attr("href", defaultPdfUrl);
 });
 
 function tanggal_indonesia(tgl, tampil_hari = true) {
