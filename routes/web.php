@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KasirPulsaPaketController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanPulsaPaket;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,6 +42,10 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.kategori');
     })->name('kategori');
 
+    Route::get('/produk', function(){
+        return view('pages.produk');
+    })->name('produk');
+
     Route::controller(AuthController::class)->group(function () {
         Route::post('/logout', 'logout')->name('logout');
         Route::get('/akun/datatables/', 'index');
@@ -69,6 +74,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kategori/edit_kategori/{id}', 'edit');
         Route::post('/kategori/update_kategori/{id}', 'update');
         Route::delete('/kategori/hapus_kategori/{id}', 'destroy');
+    });
+
+    Route::controller(ProdukController::class)->group(function () {
+        Route::get('/produk/datatables/', 'index');
+        Route::get('/produk/kategori_list/', 'kategoriList');
+        // Route::post('/kategori/tambah_kategori', 'store');
+        // Route::get('/kategori/edit_kategori/{id}', 'edit');
+        // Route::post('/kategori/update_kategori/{id}', 'update');
+        // Route::delete('/kategori/hapus_kategori/{id}', 'destroy');
     });
 
 });

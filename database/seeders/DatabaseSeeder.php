@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Produk;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,11 +18,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::create([
-            'username' => 'username',
-            'nama' => 'Nama Pengguna',
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+        Produk::create([
+            'kode_produk' => '0124121',
+            'nama_produk' => 'Nama produk',
+            'id_kategori' => 7,
+            'merk' => 'Merk',
+            'harga_beli' => 10000,
+            'harga_jual' => 15000,
+            'diskon' => 0,
+            'stok' => 10,
         ]);
     }
 }
