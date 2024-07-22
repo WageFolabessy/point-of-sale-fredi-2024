@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Produk::factory(9)->create();
 
-        Produk::create([
-            'kode_produk' => '0124121',
-            'nama_produk' => 'Nama produk',
-            'id_kategori' => 7,
-            'merk' => 'Merk',
-            'harga_beli' => 10000,
-            'harga_jual' => 15000,
-            'diskon' => 0,
-            'stok' => 10,
-        ]);
+        // Produk::create([
+        //     'kode_produk' => '0124121',
+        //     'nama_produk' => 'Nama produk',
+        //     'id_kategori' => 7,
+        //     'merk' => 'Merk',
+        //     'harga_beli' => 10000,
+        //     'harga_jual' => 15000,
+        //     'diskon' => 0,
+        //     'stok' => 10,
+        // ]);
     }
 }

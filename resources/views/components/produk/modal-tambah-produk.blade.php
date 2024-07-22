@@ -18,7 +18,7 @@
                     <div id="idKategoriError" class="text-danger"></div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="id_kategoriSpan">Nama Kategori</span>
-                        <select class="form-control" aria-label="Default select example" id="id_kategori">
+                        <select class="form-control" aria-label="Default select example" name="id_kategori" id="id_kategori">
                             <option selected disabled>Pilih kategori</option>
                             <!-- Options akan diisi dengan JavaScript -->
                         </select>

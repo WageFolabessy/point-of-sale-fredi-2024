@@ -17,13 +17,11 @@
                     </div>
                     <div id="idKategoriErrorEdit" class="text-danger"></div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="id_kategoriEdit">Nama Kategori</span>
-                        <select class="form-control" aria-label="Default select example" id="id_kategoriEdit">
+                        <span class="input-group-text" id="id_kategoriSpan">Nama Kategori</span>
+                        <select class="form-control" aria-label="Default select example" name="id_kategoriEdit" id="id_kategoriEdit">
                             <option selected disabled>Pilih kategori</option>
-                            <option>One</option>
-                            <option>Two</option>
-                            <option>Three</option>
-                          </select>
+                            <!-- Options akan diisi dengan JavaScript -->
+                        </select>
                     </div>
                     <div id="namaMerkErrorEdit" class="text-danger"></div>
                     <div class="input-group mb-3">

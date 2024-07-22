@@ -79,10 +79,12 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ProdukController::class)->group(function () {
         Route::get('/produk/datatables/', 'index');
         Route::get('/produk/kategori_list/', 'kategoriList');
-        // Route::post('/kategori/tambah_kategori', 'store');
-        // Route::get('/kategori/edit_kategori/{id}', 'edit');
-        // Route::post('/kategori/update_kategori/{id}', 'update');
-        // Route::delete('/kategori/hapus_kategori/{id}', 'destroy');
+        Route::post('/produk/tambah_produk', 'store');
+        Route::get('/produk/edit_produk/{id}', 'edit');
+        Route::post('/produk/update_produk/{id}', 'update');
+        Route::delete('/produk/hapus_produk/{id}', 'destroy');
+        Route::post('/produk/hapusBanyak_produk', 'massDelete')->name('hapusBanyak');
+        Route::post('/produk/cetak_barcode', 'cetakBarcode')->name('cetakBarcode');
     });
 
 });

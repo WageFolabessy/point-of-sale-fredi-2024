@@ -22,18 +22,31 @@
         <div class="toastrDefaultSuccess"></div>
         <h3 class="text-center" id="laporan"></h3>
         <h3 class="text-center" id="keteranganTanggal"></h3>
-        <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#modal-tambah-produk">
-            <span class="icon text-white-50">
-                <i class="fas fa-plus"></i>
-            </span>
-            <span class="text"> Tambah Produk</span>
-        </button>
-        <a type="button" href="" class="btn btn-secondary mt-3 mb-3" id="tombol-cetak-barcode">
-            <span class="icon text-white-50">
-                <i class="fas fa-barcode"></i>
-            </span>
-            <span class="text"> Cetak Barcode</span>
-        </a>
+
+        <div class="d-flex justify-content-start mb-3">
+            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-produk">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text"> Tambah Produk</span>
+            </button>
+            <a type="button" href="#" class="btn btn-secondary mr-2" id="tombol-cetak-barcode" onclick="cetakBarcode('{{ route('cetakBarcode') }}')">
+                <span class="icon text-white-50">
+                    <i class="fas fa-barcode"></i>
+                </span>
+                <span class="text"> Cetak Barcode</span>
+            </a>
+            <form method="POST" id="delete-form" action="{{ route('hapusBanyak') }}">
+                @csrf
+                <button type="button" class="btn btn-danger" id="hapusBanyak">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text"> Hapus Produk</span>
+                </button>
+            </form>
+        </div>
+
 
         @include('components.produk.modal-tambah-produk')
         @include('components.produk.modal-edit-produk')
