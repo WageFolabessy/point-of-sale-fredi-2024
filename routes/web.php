@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\KasirPulsaPaketController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanPulsaPaket;
@@ -26,23 +27,23 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.kalkulator');
     })->name('kalkulator');
 
-    Route::get('/kelola_akun', function(){
+    Route::get('/kelola_akun', function () {
         return view('pages.user');
     })->name('kelola_akun');
 
-    Route::get('/kasir_pulsa_paket', function(){
+    Route::get('/kasir_pulsa_paket', function () {
         return view('pages.kasir-pulsa-paket');
     })->name('kasir_pulsa_paket');
 
-    Route::get('/laporan_pulsa_paket', function(){
+    Route::get('/laporan_pulsa_paket', function () {
         return view('pages.laporan-pulsa-paket');
     })->name('laporan_pulsa_paket');
 
-    Route::get('/kategori', function(){
+    Route::get('/kategori', function () {
         return view('pages.kategori');
     })->name('kategori');
 
-    Route::get('/produk', function(){
+    Route::get('/produk', function () {
         return view('pages.produk');
     })->name('produk');
 
@@ -87,4 +88,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/produk/cetak_barcode', 'cetakBarcode')->name('cetakBarcode');
     });
 
+    Route::controller(DetailPenjualanController::class)->group(function () {
+        Route::get('/kasir_aksesoris', 'index')->name('kasir_aksesoris');
+        Route::post('/add-product', 'addProduct')->name('addProduct');
+        Route::post('/update-quantity', 'updateQuantity')->name('updateQuantity');
+    });
 });

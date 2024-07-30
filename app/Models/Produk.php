@@ -15,6 +15,11 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 
+    public function detailPenjualans()
+    {
+        return $this->hasMany(DetailPenjualan::class, 'id_produk');
+    }
+
     protected static function boot()
     {
         parent::boot();

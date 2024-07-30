@@ -57,8 +57,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{ route('kasir_aksesoris') }}" class="nav-link {{ request()->is('kasir_aksesoris') ? 'active' : '' }}">
+                                        <i class="far fa-{{ request()->is('kasir_aksesoris') ? 'dot-' : '' }}circle nav-icon"></i>
                                         <p>Aksesoris</p>
                                     </a>
                                 </li>
