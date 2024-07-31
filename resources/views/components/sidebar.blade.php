@@ -83,6 +83,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('penjualan') }}" class="nav-link {{ request()->is('penjualan') ? 'active' : '' }}">
+                                <i class="fas fa-store nav-icon"></i>
+                                <p>Penjualan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="./index.html" class="nav-link">
                                 <i class="ion ion-stats-bars nav-icon"></i>
                                 <p>

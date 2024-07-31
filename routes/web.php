@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DetailPenjualanController;
+use App\Http\Controllers\KasirAksesorisController;
 use App\Http\Controllers\KasirPulsaPaketController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanPulsaPaket;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TampilPenjualanController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -88,9 +90,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/produk/cetak_barcode', 'cetakBarcode')->name('cetakBarcode');
     });
 
-    Route::controller(DetailPenjualanController::class)->group(function () {
+    Route::controller(KasirAksesorisController::class)->group(function () {
         Route::get('/kasir_aksesoris', 'index')->name('kasir_aksesoris');
         Route::post('/add-product', 'addProduct')->name('addProduct');
         Route::post('/update-quantity', 'updateQuantity')->name('updateQuantity');
+        Route::post('/simpan-transaksi', 'simpanTransaksi');
+    });
+
+    Route::controller(TampilPenjualanController::class)->group(function () {
+        Route::get('/penjualan', 'index')->name('penjualan');
+        Route::get('/penjualan/datatables/', 'penjualanDataTables');
+        Route::get('/penjualan/{id}/detail', 'getDetailPenjualan');
+        Route::delete('/penjualan/{id}', 'destroy')->name('penjualan.hapus');
     });
 });

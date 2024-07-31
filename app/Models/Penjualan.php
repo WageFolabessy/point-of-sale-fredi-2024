@@ -10,6 +10,15 @@ class Penjualan extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'total_item',
+        'total_harga',
+        'diskon',
+        'bayar',
+        'diterima',
+        'nama_kasir',
+    ];
+
     public function detailPenjualans()
     {
         return $this->hasMany(DetailPenjualan::class, 'id_penjualan');

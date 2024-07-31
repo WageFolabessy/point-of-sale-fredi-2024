@@ -220,6 +220,52 @@ $(document).ready(function () {
         });
     });
 
+    $("#btn-simpan").click(function (e) {
+        e.preventDefault();
+
+        let produk = [];
+        table.rows().every(function () {
+            let data = this.data();
+            produk.push({
+                id: data[1], // Kode Produk
+                harga_jual: parseInt(data[3].replace(/\D/g, "")),
+                jumlah: $(this.node()).find(".jumlah").val(),
+                diskon: parseInt(data[5]) || 0,
+                subtotal: parseInt($(this.node()).find(".subtotal").data("value")) // Ambil data-value dari elemen subtotal
+            });
+        });
+
+        // Data yang akan dikirim ke server
+        let transaksi = {
+            total_item: produk.length,
+            total_harga: parseInt($("#totalrp").val().replace(/\D/g, "")),
+            diskon: parseFloat($("#diskon").val()) || 0,
+            bayar: parseInt($("#bayarrp").val().replace(/\D/g, "")),
+            diterima: parseInt($("#diterima").val().replace(/\D/g, "")),
+            nama_kasir: $("#nama_kasir").val(),
+            produk: produk,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+        };
+        console.log(transaksi);
+
+        $.ajax({
+            type: "POST",
+            url: "simpan-transaksi",
+            data: transaksi,
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    window.location.reload(); // reload halaman
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Gagal menyimpan transaksi. Silakan coba lagi.");
+                console.log(xhr.responseText);
+            }
+        });
+    });
+
+
     // Event handler untuk input diterima
     $("#diterima").on("input", hitungKembalian);
     // Event handler untuk input diskon

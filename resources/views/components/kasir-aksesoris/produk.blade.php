@@ -38,7 +38,10 @@
                                     <td>{{ $produk->diskon }}%</td>
                                     <td>{{ $produk->stok }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-xs btn-flat pilih-produk"
+                                        <a href="#"
+                                            @if ($produk->stok < 1 ) class="btn btn-primary btn-xs btn-flat pilih-produk disabled"
+                                            @else class="btn btn-primary btn-xs btn-flat pilih-produk"
+                                            @endif
                                             data-id="{{ $produk->id }}"
                                             data-kode="{{ $produk->kode_produk }}"
                                             data-nama="{{ $produk->nama_produk }}"

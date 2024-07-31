@@ -146,6 +146,7 @@
                                                     value="0" readonly>
                                             </div>
                                         </div>
+                                        <input type="hidden" id="nama_kasir" value="{{ Auth::user()->nama }}">
                                         <div class="box-footer ">
                                             <button type="submit" class=" mt-3 btn btn-info btn-sm btn-flat pull-right"
                                                 id="btn-simpan"><i class="fa fa-floppy-o"></i> Simpan Transaksi</button>
