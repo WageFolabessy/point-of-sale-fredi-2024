@@ -4,7 +4,7 @@ Berikut adalah daftar teknologi dan pustaka yang digunakan dalam pengembangan we
 
 ## PHP
 
-Website ini dibangun menggunakan PHP versi ^8.2.
+Website ini dibangun menggunakan PHP versi ^8.2 dan Laravel versi ^11.
 
 ## Pustaka Utama
 
