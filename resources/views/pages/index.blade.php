@@ -23,15 +23,15 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{ $totalTransaksiHariIni }}</h3>
 
                             <p>Total Transaksi Hari Ini</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
+                        <div class="small-box-footer"> <i
+                                class="fas fa-none"></i></div>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -39,7 +39,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>{{ format_uang($total_keuntungan) }}</h3>
 
                             <p>Profit Hari Ini</p>
                         </div>
@@ -55,14 +55,14 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3 class="text-white">{{ DB::table('produks')->count() }}</h3>
 
-                            <p>Total Stok</p>
+                            <p>Total Produk</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fas fa-cubes"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
+                        <a href="{{ route('produk') }}" class="small-box-footer">Selengkapnya <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -71,14 +71,14 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>{{ DB::table('users')->count() }}</h3>
 
                             <p>Akun</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
+                        <a href="{{ route('kelola_akun') }}" class="small-box-footer">Selengkapnya <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

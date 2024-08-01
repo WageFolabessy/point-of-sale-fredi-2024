@@ -8,6 +8,10 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanPulsaPaket;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TampilPenjualanController;
+use App\Models\DetailPenjualan;
+use App\Models\KasirPulsaPaket;
+use App\Models\Penjualan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,7 +23,23 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
-        return view('pages.index');
+        $pulsa_paket = KasirPulsaPaket::whereDate('created_at', today())->count();
+        $aksesoris = Penjualan::whereDate('created_at', today())->count();
+        $totalTransaksiHariIni = intval($pulsa_paket) + intval($aksesoris);
+
+        $keuntungan = DB::table('detail_penjualans')
+            ->join('produks', 'detail_penjualans.id_produk', '=', 'produks.id')
+            ->select(DB::raw('SUM((detail_penjualans.harga_jual - produks.harga_beli) * detail_penjualans.jumlah) as total_keuntungan'))
+            ->whereDate('detail_penjualans.created_at', today())
+            ->first();
+        $keuntungan_pulsa_paket = DB::table('kasir_pulsa_pakets')
+            ->select(DB::raw('SUM(profit) as total_keuntungan'))
+            ->whereDate('kasir_pulsa_pakets.created_at', today())
+            ->first();
+
+        $total_keuntungan = $keuntungan->total_keuntungan + $keuntungan_pulsa_paket->total_keuntungan;
+
+        return view('pages.index', compact('totalTransaksiHariIni', 'total_keuntungan'));
     });
     Route::get('/kalender', function () {
         return view('pages.kalender');
