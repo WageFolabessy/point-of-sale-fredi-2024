@@ -27,7 +27,7 @@ class LaporanPulsaPaket extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('created_at', function ($data) {
-                return tanggal_indonesia($data->created_at);
+                return tanggal_indonesia($data->created_at, false);
             })
             ->addColumn('harga_beli', function ($data) {
                 return format_uang($data->harga_beli);

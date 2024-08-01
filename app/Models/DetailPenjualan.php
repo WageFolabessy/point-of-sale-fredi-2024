@@ -29,4 +29,37 @@ class DetailPenjualan extends Model
     {
         return $this->belongsTo(Produk::class, 'id_produk');
     }
+
+    public function getKeuntunganAttribute()
+    {
+        // Mengakses harga_beli dari relasi produk
+        $hargaBeli = $this->produk->harga_beli;
+
+        // Menghitung harga setelah diskon
+        $hargaSetelahDiskon = $this->harga_jual - ($this->harga_jual * $this->diskon / 100);
+
+        // Menghitung keuntungan
+        $keuntungan = ($hargaSetelahDiskon - $hargaBeli) * $this->jumlah;
+
+        return $keuntungan;
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            // Mengakses harga_beli dari relasi produk
+            $hargaBeli = $model->produk->harga_beli;
+
+            // Menghitung harga setelah diskon
+            $hargaSetelahDiskon = $model->harga_jual - ($model->harga_jual * $model->diskon / 100);
+
+            // Menghitung keuntungan
+            $keuntungan = ($hargaSetelahDiskon - $hargaBeli) * $model->jumlah;
+
+            // Menyimpan keuntungan ke dalam atribut model
+            $model->keuntungan = $keuntungan;
+        });
+    }
 }

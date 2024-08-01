@@ -110,8 +110,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="{{ route('laporan_aksesoris') }}" class="nav-link {{ request()->is('laporan_aksesoris') ? 'active' : '' }}">
+                                        <i class="far fa-{{ request()->is('laporan_aksesoris') ? 'dot-' : '' }}circle nav-icon"></i>
                                         <p>Aksesoris</p>
                                     </a>
                                 </li>

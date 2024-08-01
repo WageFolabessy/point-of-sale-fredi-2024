@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->tinyInteger('diskon')->default(0);
             $table->integer('subtotal');
+            $table->integer('keuntungan')->nullable();
             $table->timestamps();
             $table->foreign('id_penjualan')->references('id')->on('penjualans')->onDelete('cascade');
             $table->foreign('id_produk')->references('id')->on('produks')->onDelete('cascade');
