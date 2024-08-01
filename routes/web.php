@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\KasirAksesorisController;
 use App\Http\Controllers\KasirPulsaPaketController;
 use App\Http\Controllers\KategoriController;
@@ -9,7 +8,6 @@ use App\Http\Controllers\LaporanAksesorisController;
 use App\Http\Controllers\LaporanPulsaPaket;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TampilPenjualanController;
-use App\Models\DetailPenjualan;
 use App\Models\KasirPulsaPaket;
 use App\Models\Penjualan;
 use Illuminate\Support\Facades\DB;
@@ -95,6 +93,11 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(LaporanPulsaPaket::class)->group(function () {
         Route::get('/laporan_pulsa_paket/datatables/', 'index');
         Route::get('/laporan_pulsa_paket/pdf/{startDate}/{endDate}', 'generatePdf')->name('pulsa_paket_pdf');
+    });
+
+    Route::controller(LaporanAksesorisController::class)->group(function () {
+        Route::get('/laporan_aksesoris/datatables/', 'index');
+        Route::get('/laporan_aksesoris/pdf/{startDate}/{endDate}', 'generatePdf')->name('aksesoris_pdf');
     });
 
     Route::controller(LaporanAksesorisController::class)->group(function () {
