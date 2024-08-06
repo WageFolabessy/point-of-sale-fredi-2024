@@ -42,11 +42,10 @@ class AuthController extends Controller
 
         return DataTables::of($user)
             ->addIndexColumn()
-            ->addColumn('is_admin', function ($user){
-                if($user->is_admin == false){
+            ->addColumn('is_admin', function ($user) {
+                if ($user->is_admin == false) {
                     return 'Biasa';
-                }
-                else{
+                } else {
                     return 'Admin';
                 }
             })
@@ -59,22 +58,33 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'username' => 'required|unique:users,username,',
+            'username' => 'required|unique:users,username',
             'is_admin' => 'required',
             'password' => 'required',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'nama.required' => 'Nama harus diisi',
             'username.required' => 'Username harus diisi',
             'username.unique' => 'Username sudah digunakan',
             'is_admin.required' => 'Peran harus diisi',
             'password.required' => 'Password harus diisi',
+            'foto_profil.image' => 'Foto Profil harus berupa gambar',
+            'foto_profil.mimes' => 'Foto Profil harus berupa file jpeg, png, jpg, atau gif',
+            'foto_profil.max' => 'Foto Profil maksimal berukuran 2MB',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        // Upload foto profil
+        $fotoProfil = 'user.png'; // default value
+        if ($request->hasFile('foto_profil')) {
+            $file = $request->file('foto_profil');
+            $fotoProfil = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $fotoProfil);
         }
 
         $user = new User;
@@ -82,9 +92,12 @@ class AuthController extends Controller
         $user->username = $request->username;
         $user->is_admin = $request->is_admin;
         $user->password = Hash::make($request->password);
+        $user->foto_profil = $fotoProfil; // simpan nama file foto profil
         $user->save();
+
         return response()->json(['message' => 'Akun berhasil ditambahkan.']);
     }
+
 
     public function edit($id)
     {
@@ -99,12 +112,16 @@ class AuthController extends Controller
             'username' => 'required|unique:users,username,' . $id,
             'is_admin' => 'required',
             'password' => 'nullable',
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'nama.required' => 'Nama harus diisi',
             'username.required' => 'Username harus diisi',
             'username.unique' => 'Username sudah digunakan',
             'is_admin.required' => 'Peran harus diisi',
             'password.nullable' => 'Password harus diisi',
+            'foto_profil.image' => 'Foto Profil harus berupa gambar',
+            'foto_profil.mimes' => 'Foto Profil harus berupa file jpeg, png, jpg, atau gif',
+            'foto_profil.max' => 'Foto Profil maksimal berukuran 2MB',
         ]);
 
         if ($validator->fails()) {
@@ -118,6 +135,24 @@ class AuthController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+
+        // Upload foto profil jika ada
+        if ($request->hasFile('foto_profil')) {
+            $file = $request->file('foto_profil');
+            $fotoProfil = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $fotoProfil);
+
+            // Delete old foto profil if exists and not default 'user.png'
+            if ($user->foto_profil && $user->foto_profil !== 'user.png') {
+                $oldFile = public_path('images') . '/' . $user->foto_profil;
+                if (file_exists($oldFile)) {
+                    unlink($oldFile);
+                }
+            }
+
+            $user->foto_profil = $fotoProfil;
+        }
+
         $user->save();
         return response()->json(['message' => 'Profil User berhasil diperbaharui.']);
     }

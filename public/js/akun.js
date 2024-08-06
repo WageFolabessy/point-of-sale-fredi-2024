@@ -2,7 +2,7 @@
 $("#tabelAkun").DataTable({
     processing: false,
     serverSide: true,
-    ajax: '/akun/datatables/',
+    ajax: "/akun/datatables/",
     columns: [
         { data: "DT_RowIndex", name: "DT_RowIndex" },
         { data: "nama", name: "nama" },
@@ -14,16 +14,25 @@ $("#tabelAkun").DataTable({
 
 $(document).on("click", "#tambah-akun", function (e) {
     e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
+    formData.append("nama", $("input[name=nama]").val());
+    formData.append("username", $("input[name=username]").val());
+    formData.append("is_admin", $("#input_isAdmin").val());
+    formData.append("password", $("input[name=password]").val());
+
+    let fotoProfilInput = $("#fotoProfilInput")[0];
+    if (fotoProfilInput.files.length > 0) {
+        formData.append("foto_profil", fotoProfilInput.files[0]);
+    }
+
     $.ajax({
         type: "POST",
         url: "/akun/tambah_akun",
-        data: {
-            _token: $('meta[name="csrf-token"]').attr("content"),
-            nama: $("input[name=nama]").val(),
-            username: $("input[name=username]").val(),
-            is_admin: $("#input_isAdmin").val(),
-            password: $("input[name=password]").val(),
-        },
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             $("#modal-tambah-akun").modal("hide");
 
@@ -39,6 +48,9 @@ $(document).on("click", "#tambah-akun", function (e) {
             $("#usernameError").text(response.responseJSON.error.username);
             $("#isAdminError").text(response.responseJSON.error.is_admin);
             $("#passwordError").text(response.responseJSON.error.password);
+            if (response.responseJSON.error.foto_profil) {
+                $("#fotoError").text(response.responseJSON.error.foto_profil);
+            }
         },
     });
 });
@@ -70,14 +82,17 @@ $(document).on("click", "#tombol-edit", function (e) {
         url: "/akun/edit_akun/" + id,
         type: "GET",
         success: function (response) {
-            // Set data akun
-            const { nama, username, is_admin } = response;
+            const { nama, username, is_admin, foto_profil } = response;
 
             $("#inputNamaEdit").val(nama);
             $("#inputusernameEdit").val(username);
             $("#input_isAdminEdit").val(is_admin);
+            if (foto_profil) {
+                $("#fotoPreviewEdit")
+                    .attr("src", "/images/" + foto_profil)
+                    .removeClass("d-none");
+            }
 
-            // Menambahkan event handler
             $("#edit-akun")
                 .off("click")
                 .on("click", function () {
@@ -88,17 +103,23 @@ $(document).on("click", "#tombol-edit", function (e) {
 });
 
 function updateAkun(id) {
-    let data = {
-        _token: $('meta[name="csrf-token"]').attr("content"),
-        nama: $("#inputNamaEdit").val(),
-        username: $("#inputusernameEdit").val(),
-        is_admin: $("#input_isAdminEdit").val(),
-    };
+    let formData = new FormData();
+    formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
+    formData.append("nama", $("#inputNamaEdit").val());
+    formData.append("username", $("#inputusernameEdit").val());
+    formData.append("is_admin", $("#input_isAdminEdit").val());
+
+    let fotoProfilInput = $("#fotoProfilInputEdit")[0];
+    if (fotoProfilInput.files.length > 0) {
+        formData.append("foto_profil", fotoProfilInput.files[0]);
+    }
 
     $.ajax({
         url: "/akun/update_akun/" + id,
         type: "POST",
-        data: data,
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             $("#modal-edit-akun").modal("hide");
             $("#tabelAkun").DataTable().ajax.reload();
@@ -112,7 +133,11 @@ function updateAkun(id) {
             $("#namaErrorEdit").text(response.responseJSON.error.nama);
             $("#usernameErrorEdit").text(response.responseJSON.error.username);
             $("#isAdminErrorEdit").text(response.responseJSON.error.is_admin);
-            $("#passwordErrorEdit").text(response.responseJSON.error.password);
+            if (response.responseJSON.error.foto_profil) {
+                $("#fotoErrorEdit").text(
+                    response.responseJSON.error.foto_profil
+                );
+            }
         },
     });
 }

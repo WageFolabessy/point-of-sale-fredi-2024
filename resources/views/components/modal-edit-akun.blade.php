@@ -31,11 +31,21 @@
                         </select>
                     </div>
                     <div id="passwordErrorEdit" class="text-danger"></div>
-                    <div class="input-group">
+                    <div class="input-group mb-3">
                         <span class="input-group-text" id="Password">Password</span>
                         <input name="password" id="inputPasswordEdit" type="password" class="form-control"
                             placeholder="Masukan password" aria-label="Password" aria-describedby="Password"
                             autocomplete="new-password" />
+                    </div>
+                    <div id="fotoErrorEdit" class="text-danger"></div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="fotoProfilEdit">Foto Profil</span>
+                        <input type="file" class="form-control" id="fotoProfilInputEdit" name="foto_profil"
+                            accept="image/*" />
+                    </div>
+                    <div class="mb-3 text-center">
+                        <img src="" alt="Foto Profil" class="img-fluid d-none" id="fotoPreviewEdit"
+                            style="max-width: 200px; border-radius: 50%; border: 2px solid #ddd;" />
                     </div>
                 </div>
             </div>

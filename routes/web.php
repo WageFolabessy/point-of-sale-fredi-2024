@@ -6,6 +6,8 @@ use App\Http\Controllers\KasirPulsaPaketController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanAksesorisController;
 use App\Http\Controllers\LaporanPulsaPaket;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TampilPenjualanController;
 use App\Models\KasirPulsaPaket;
@@ -73,6 +75,14 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.produk');
     })->name('produk');
 
+    Route::get('/pengeluaran', function () {
+        return view('pages.pengeluaran');
+    })->name('pengeluaran');
+
+    Route::get('/pembelian', function () {
+        return view('pages.pembelian');
+    })->name('pembelian');
+
     Route::controller(AuthController::class)->group(function () {
         Route::post('/logout', 'logout')->name('logout');
         Route::get('/akun/datatables/', 'index');
@@ -132,9 +142,25 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::controller(TampilPenjualanController::class)->group(function () {
-        Route::get('/penjualan', 'index')->name('penjualan');
+        Route::get('/detail_penjualan', 'index')->name('penjualan');
         Route::get('/penjualan/datatables/', 'penjualanDataTables');
         Route::get('/penjualan/{id}/detail', 'getDetailPenjualan');
         Route::delete('/penjualan/{id}', 'destroy')->name('penjualan.hapus');
+    });
+
+    Route::controller(PengeluaranController::class)->group(function () {
+        Route::get('/pengeluaran/datatables/', 'index');
+        Route::post('/pengeluaran/tambah_pengeluaran', 'store');
+        Route::get('/pengeluaran/edit_pengeluaran/{id}', 'edit');
+        Route::post('/pengeluaran/update_pengeluaran/{id}', 'update');
+        Route::delete('/pengeluaran/hapus_pengeluaran/{id}', 'destroy');
+    });
+
+    Route::controller(PembelianController::class)->group(function () {
+        Route::get('/pembelian/datatables/', 'index');
+        Route::post('/pembelian/tambah_pembelian', 'store');
+        Route::get('/pembelian/edit_pembelian/{id}', 'edit');
+        Route::post('/pembelian/update_pembelian/{id}', 'update');
+        Route::delete('/pembelian/hapus_pembelian/{id}', 'destroy');
     });
 });

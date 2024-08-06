@@ -30,7 +30,7 @@
             </span>
             <span class="text"> Ubah Periode Laporan</span>
         </button>
-        <a type="button" href="" class="btn btn-danger mt-3 mb-3" id="tombol-pdf"
+        <a type="button" href="" target="_blank" class="btn btn-danger mt-3 mb-3" id="tombol-pdf"
             data-url="{{ route('aksesoris_pdf', ['startDate' => 'startDatePlaceholder', 'endDate' => 'endDatePlaceholder']) }}">
             <span class="icon text-white-50">
                 <i class="fas fa-file-pdf"></i>

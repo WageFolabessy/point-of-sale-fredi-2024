@@ -14,7 +14,13 @@ $("#tabelProduk").DataTable({
         { data: "merk", name: "merk" },
         { data: "harga_beli", name: "harga_beli" },
         { data: "harga_jual", name: "harga_jual" },
-        { data: "diskon", name: "diskon" },
+        {
+            data: "diskon",
+            name: "diskon",
+            render: function (data) {
+                return data + "%";
+            },
+        },
         { data: "stok", name: "stok" },
         { data: "aksi", name: "aksi", orderable: false, searchable: false },
     ],
@@ -215,31 +221,35 @@ function updateProduk(id) {
 function cetakBarcode(url) {
     var selectedCount = $('input[name="id_produk[]"]:checked').length;
 
-    console.log('Jumlah produk yang dipilih: ' + selectedCount);
+    console.log("Jumlah produk yang dipilih: " + selectedCount);
 
     if (selectedCount < 1) {
-        alert('Pilih data yang akan dicetak');
+        alert("Pilih data yang akan dicetak");
         return;
     } else {
-        var form = $('<form>', {
-            'method': 'POST',
-            'action': url,
-            'target': '_blank'
-        }).append($('<input>', {
-            'type': 'hidden',
-            'name': '_token',
-            'value': $('meta[name="csrf-token"]').attr("content")
-        }));
+        var form = $("<form>", {
+            method: "POST",
+            action: url,
+            target: "_blank",
+        }).append(
+            $("<input>", {
+                type: "hidden",
+                name: "_token",
+                value: $('meta[name="csrf-token"]').attr("content"),
+            })
+        );
 
-        $('input[name="id_produk[]"]:checked').each(function() {
-            form.append($('<input>', {
-                'type': 'hidden',
-                'name': 'id_produk[]',
-                'value': $(this).val()
-            }));
+        $('input[name="id_produk[]"]:checked').each(function () {
+            form.append(
+                $("<input>", {
+                    type: "hidden",
+                    name: "id_produk[]",
+                    value: $(this).val(),
+                })
+            );
         });
 
-        $('body').append(form);
+        $("body").append(form);
         form.submit();
     }
 }
