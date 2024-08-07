@@ -6,6 +6,7 @@ use App\Models\DetailPenjualan;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KasirAksesorisController extends Controller
 {
@@ -85,9 +86,18 @@ class KasirAksesorisController extends Controller
                 $produk->save();
             }
 
-            return response()->json(['success' => true, 'message' => 'Transaksi berhasil disimpan.']);
+            return response()->json(['success' => true, 'message' => 'Transaksi berhasil disimpan.', 'penjualan_id' => $penjualan->id]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
+    }
+
+
+    public function cetakNota($id)
+    {
+        $penjualan = Penjualan::with('detailPenjualans.produk')->findOrFail($id);
+
+        $pdf = PDF::loadView('pages.nota-aksesoris', compact('penjualan'));
+        return $pdf->stream('nota.pdf'); // Atau ->download('nota.pdf') untuk mendownload langsung
     }
 }

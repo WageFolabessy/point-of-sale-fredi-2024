@@ -16,7 +16,7 @@
                     alt="User Image" />
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->nama }}</a>
+                <a href="{{ route('kelola_akun') }}" class="d-block">{{ Auth::user()->nama }}</a>
             </div>
         </div>
 

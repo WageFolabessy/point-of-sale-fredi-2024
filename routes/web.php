@@ -139,6 +139,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/add-product', 'addProduct')->name('addProduct');
         Route::post('/update-quantity', 'updateQuantity')->name('updateQuantity');
         Route::post('/simpan-transaksi', 'simpanTransaksi');
+        Route::get('/cetak-nota/{id}', 'cetakNota')->name('cetak.nota');
+
     });
 
     Route::controller(TampilPenjualanController::class)->group(function () {

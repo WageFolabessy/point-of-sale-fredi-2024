@@ -121,8 +121,8 @@
                                             <label for="diskon" class="col-lg-4 col-form-label">Diskon</label>
                                             <div class="col-lg-8">
                                                 <input type="number" name="diskon" id="diskon" class="form-control"
-                                                    value="0" onfocus="clearZero(this)"
-                                                    onblur="restoreZero(this)" oninput="hitungDiskon()">
+                                                    value="0" onfocus="clearZero(this)" onblur="restoreZero(this)"
+                                                    oninput="hitungDiskon()">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -148,8 +148,10 @@
                                         </div>
                                         <input type="hidden" id="nama_kasir" value="{{ Auth::user()->nama }}">
                                         <div class="box-footer ">
-                                            <button type="submit" class=" mt-3 btn btn-info btn-sm btn-flat pull-right"
-                                                id="btn-simpan"><i class="fa fa-floppy-o"></i> Simpan Transaksi</button>
+                                            <button type="submit" class=" mt-3 btn btn-info btn-sm btn-flat pull-right mr-3"
+                                                id="btn-simpan"><i class="fa fa-save"></i> Simpan Transaksi</button>
+                                            <button type="submit" class=" mt-3 btn btn-warning btn-sm btn-flat pull-right"
+                                                id="btn-simpan-dan-cetak-nota"><i class="fa fa-print"></i> Simpan dan Cetak Nota Transaksi</button>
                                         </div>
                                     </form>
                                 </div>
