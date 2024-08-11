@@ -83,6 +83,11 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.pembelian');
     })->middleware('can:admin')->name('pembelian');
 
+    Route::get('/notifications/mark-as-read', function(){
+        auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->back()->with('success', 'Semua notifikasi telah ditandai sebagai sudah dibaca.');
+    })->name('notifications.markAllAsRead');
+
     Route::controller(AuthController::class)->group(function () {
         Route::post('/logout', 'logout')->name('logout');
         Route::get('/akun/datatables/', 'index');

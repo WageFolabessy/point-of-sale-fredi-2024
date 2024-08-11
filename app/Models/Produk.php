@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Faker\Factory as Faker;
+use Illuminate\Notifications\Notifiable;
 
 class Produk extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     public function kategori()
     {
@@ -38,4 +39,5 @@ class Produk extends Model
 
         return $kode_produk;
     }
+
 }

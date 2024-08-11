@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DetailPenjualan;
 use App\Models\Penjualan;
 use App\Models\Produk;
+use App\Models\User;
+use App\Notifications\LowStockNotification;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -84,6 +86,16 @@ class KasirAksesorisController extends Controller
                 // Update stok produk
                 $produk->stok -= $item['jumlah'];
                 $produk->save();
+
+                if (in_array($produk->stok, [1, 2, 3])) {
+                    // Mendapatkan semua user, baik admin maupun non-admin
+                    $users = User::all();
+
+                    // Kirim notifikasi ke setiap user
+                    foreach ($users as $user) {
+                        $user->notify(new LowStockNotification($produk));
+                    }
+                }
             }
 
             return response()->json(['success' => true, 'message' => 'Transaksi berhasil disimpan.', 'penjualan_id' => $penjualan->id]);

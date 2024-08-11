@@ -1,7 +1,7 @@
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('assets/plugins/adminlte/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60"
-        width="60" />
+    <img class="animation__shake" src="{{ asset('assets/plugins/adminlte/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
+        height="60" width="60" />
 </div>
 
 <!-- Navbar -->
@@ -15,56 +15,42 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search" />
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
+        @php
+            // Mengambil hanya notifikasi yang belum dibaca
+            $unreadNotifications = auth()
+                ->user()
+                ->unreadNotifications()
+                ->where('type', 'App\Notifications\LowStockNotification')
+                ->get();
+        @endphp
 
-        <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                @if ($unreadNotifications->count() > 0)
+                    <span class="badge badge-danger navbar-badge">{{ $unreadNotifications->count() }}</span>
+                @endif
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">{{ $unreadNotifications->count() }} Notifikasi Stok
+                    Rendah</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
-                </a>
+                @foreach ($unreadNotifications as $notification)
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cubes mr-2"></i> {{ $notification->data['nama_produk'] }} - Tersisa:
+                        {{ $notification->data['stok'] }} stok
+                        <span
+                            class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                @endforeach
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                <a href="{{ route('notifications.markAllAsRead') }}" class="dropdown-item dropdown-footer">Tandai semua
+                    sudah dibaca</a>
             </div>
         </li>
+
+
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
