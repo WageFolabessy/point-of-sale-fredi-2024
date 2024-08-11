@@ -61,35 +61,35 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/laporan_pulsa_paket', function () {
         return view('pages.laporan-pulsa-paket');
-    })->name('laporan_pulsa_paket');
+    })->middleware('can:admin')->name('laporan_pulsa_paket');
 
     Route::get('/laporan_aksesoris', function () {
         return view('pages.laporan-aksesoris');
-    })->name('laporan_aksesoris');
+    })->middleware('can:admin')->name('laporan_aksesoris');
 
     Route::get('/kategori', function () {
         return view('pages.kategori');
-    })->name('kategori');
+    })->middleware('can:admin')->name('kategori');
 
     Route::get('/produk', function () {
         return view('pages.produk');
-    })->name('produk');
+    })->middleware('can:admin')->name('produk');
 
     Route::get('/pengeluaran', function () {
         return view('pages.pengeluaran');
-    })->name('pengeluaran');
+    })->middleware('can:admin')->name('pengeluaran');
 
     Route::get('/pembelian', function () {
         return view('pages.pembelian');
-    })->name('pembelian');
+    })->middleware('can:admin')->name('pembelian');
 
     Route::controller(AuthController::class)->group(function () {
         Route::post('/logout', 'logout')->name('logout');
         Route::get('/akun/datatables/', 'index');
-        Route::post('/akun/tambah_akun', 'store');
+        Route::post('/akun/tambah_akun', 'store')->middleware('can:admin');
         Route::get('/akun/edit_akun/{id}', 'edit');
         Route::post('/akun/update_akun/{id}', 'update');
-        Route::delete('/akun/hapus_akun/{id}', 'destroy');
+        Route::delete('/akun/hapus_akun/{id}', 'destroy')->middleware('can:admin');
     });
 
     Route::controller(KasirPulsaPaketController::class)->group(function () {
@@ -103,17 +103,17 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(LaporanPulsaPaket::class)->group(function () {
         Route::get('/laporan_pulsa_paket/datatables/', 'index');
         Route::get('/laporan_pulsa_paket/pdf/{startDate}/{endDate}', 'generatePdf')->name('pulsa_paket_pdf');
-    });
+    })->middleware('can:admin');
 
     Route::controller(LaporanAksesorisController::class)->group(function () {
         Route::get('/laporan_aksesoris/datatables/', 'index');
         Route::get('/laporan_aksesoris/pdf/{startDate}/{endDate}', 'generatePdf')->name('aksesoris_pdf');
-    });
+    })->middleware('can:admin');
 
     Route::controller(LaporanAksesorisController::class)->group(function () {
         Route::get('/laporan_aksesoris/datatables/', 'index');
         Route::get('/laporan_aksesoris/pdf/{startDate}/{endDate}', 'generatePdf')->name('aksesoris_pdf');
-    });
+    })->middleware('can:admin');
 
     Route::controller(KategoriController::class)->group(function () {
         Route::get('/kategori/datatables/', 'index');
@@ -121,7 +121,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kategori/edit_kategori/{id}', 'edit');
         Route::post('/kategori/update_kategori/{id}', 'update');
         Route::delete('/kategori/hapus_kategori/{id}', 'destroy');
-    });
+    })->middleware('can:admin');
 
     Route::controller(ProdukController::class)->group(function () {
         Route::get('/produk/datatables/', 'index');
@@ -132,7 +132,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/produk/hapus_produk/{id}', 'destroy');
         Route::post('/produk/hapusBanyak_produk', 'massDelete')->name('hapusBanyak');
         Route::post('/produk/cetak_barcode', 'cetakBarcode')->name('cetakBarcode');
-    });
+    })->middleware('can:admin');
 
     Route::controller(KasirAksesorisController::class)->group(function () {
         Route::get('/kasir_aksesoris', 'index')->name('kasir_aksesoris');
@@ -148,7 +148,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/penjualan/datatables/', 'penjualanDataTables');
         Route::get('/penjualan/{id}/detail', 'getDetailPenjualan');
         Route::delete('/penjualan/{id}', 'destroy')->name('penjualan.hapus');
-    });
+    })->middleware('can:admin');
 
     Route::controller(PengeluaranController::class)->group(function () {
         Route::get('/pengeluaran/datatables/', 'index');
@@ -156,7 +156,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pengeluaran/edit_pengeluaran/{id}', 'edit');
         Route::post('/pengeluaran/update_pengeluaran/{id}', 'update');
         Route::delete('/pengeluaran/hapus_pengeluaran/{id}', 'destroy');
-    });
+    })->middleware('can:admin');
 
     Route::controller(PembelianController::class)->group(function () {
         Route::get('/pembelian/datatables/', 'index');
@@ -164,5 +164,5 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pembelian/edit_pembelian/{id}', 'edit');
         Route::post('/pembelian/update_pembelian/{id}', 'update');
         Route::delete('/pembelian/hapus_pembelian/{id}', 'destroy');
-    });
+    })->middleware('can:admin');
 });

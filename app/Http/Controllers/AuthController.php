@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -38,16 +39,31 @@ class AuthController extends Controller
 
     public function index()
     {
-        $user = User::orderBy('created_at', 'desc')->get();
+        if (Gate::allows('admin')) {
+            $user = User::orderBy('created_at', 'desc')->get();
 
-        return DataTables::of($user)
+            return DataTables::of($user)
+                ->addIndexColumn()
+                ->addColumn('is_admin', function ($user) {
+                    if ($user->is_admin == false) {
+                        return 'Biasa';
+                    } else {
+                        return 'Admin';
+                    }
+                })
+                ->addColumn('aksi', function ($user) {
+                    return view('components.user-tombol-aksi')->with('user', $user);
+                })
+                ->rawColumns(['is_admin'])
+                ->make(true);
+        }
+
+        $user = Auth::user();
+
+        return DataTables::of(collect([$user]))
             ->addIndexColumn()
             ->addColumn('is_admin', function ($user) {
-                if ($user->is_admin == false) {
-                    return 'Biasa';
-                } else {
-                    return 'Admin';
-                }
+                return $user->is_admin ? 'Admin' : 'Biasa';
             })
             ->addColumn('aksi', function ($user) {
                 return view('components.user-tombol-aksi')->with('user', $user);

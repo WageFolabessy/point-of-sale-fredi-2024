@@ -75,73 +75,83 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('kategori') }}"
-                                class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
-                                <i class="fas fa-cube nav-icon"></i>
-                                <p>Kategori</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('produk') }}"
-                                class="nav-link {{ request()->is('produk') ? 'active' : '' }}">
-                                <i class="fas fa-cubes nav-icon"></i>
-                                <p>Produk</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('pengeluaran') }}"
-                                class="nav-link {{ request()->is('pengeluaran') ? 'active' : '' }}">
-                                <i class="fas fa-dollar-sign nav-icon"></i>
-                                <p>Pengularan</p>
-                            </a>
-                        </li>
+                        @can('admin')
+                            <li class="nav-item">
+                                <a href="{{ route('kategori') }}"
+                                    class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
+                                    <i class="fas fa-cube nav-icon"></i>
+                                    <p>Kategori</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('admin')
+                            <li class="nav-item">
+                                <a href="{{ route('produk') }}"
+                                    class="nav-link {{ request()->is('produk') ? 'active' : '' }}">
+                                    <i class="fas fa-cubes nav-icon"></i>
+                                    <p>Produk</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('admin')
+                            <li class="nav-item">
+                                <a href="{{ route('pengeluaran') }}"
+                                    class="nav-link {{ request()->is('pengeluaran') ? 'active' : '' }}">
+                                    <i class="fas fa-dollar-sign nav-icon"></i>
+                                    <p>Pengularan</p>
+                                </a>
+                            </li>
+                        @endcan
                         {{-- <li class="nav-item">
                             <a href="{{ route('pembelian') }}" class="nav-link {{ request()->is('pembelian') ? 'active' : '' }}">
                                 <i class="fas fa-upload nav-icon"></i>
                                 <p>Pembelian</p>
                             </a>
                         </li> --}}
-                        <li class="nav-item">
-                            <a href="{{ route('penjualan') }}"
-                                class="nav-link {{ request()->is('penjualan') ? 'active' : '' }}">
-                                <i class="fas fa-download nav-icon"></i>
-                                <p>Detail Penjualan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
-                                <i class="ion ion-stats-bars nav-icon"></i>
-                                <p>
-                                    Laporan
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Service</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('laporan_aksesoris') }}"
-                                        class="nav-link {{ request()->is('laporan_aksesoris') ? 'active' : '' }}">
-                                        <i
-                                            class="far fa-{{ request()->is('laporan_aksesoris') ? 'dot-' : '' }}circle nav-icon"></i>
-                                        <p>Aksesoris</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('laporan_pulsa_paket') }}"
-                                        class="nav-link {{ request()->is('laporan_pulsa_paket') ? 'active' : '' }}">
-                                        <i
-                                            class="far fa-{{ request()->is('laporan_pulsa_paket') ? 'dot-' : '' }}circle nav-icon"></i>
-                                        <p>Pulsa / Paket Data</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('admin')
+                            <li class="nav-item">
+                                <a href="{{ route('penjualan') }}"
+                                    class="nav-link {{ request()->is('penjualan') ? 'active' : '' }}">
+                                    <i class="fas fa-download nav-icon"></i>
+                                    <p>Detail Penjualan</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('admin')
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="ion ion-stats-bars nav-icon"></i>
+                                    <p>
+                                        Laporan
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Service</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('laporan_aksesoris') }}"
+                                            class="nav-link {{ request()->is('laporan_aksesoris') ? 'active' : '' }}">
+                                            <i
+                                                class="far fa-{{ request()->is('laporan_aksesoris') ? 'dot-' : '' }}circle nav-icon"></i>
+                                            <p>Aksesoris</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('laporan_pulsa_paket') }}"
+                                            class="nav-link {{ request()->is('laporan_pulsa_paket') ? 'active' : '' }}">
+                                            <i
+                                                class="far fa-{{ request()->is('laporan_pulsa_paket') ? 'dot-' : '' }}circle nav-icon"></i>
+                                            <p>Pulsa / Paket Data</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
                         <li class="nav-item">
                             <a href="{{ route('kalender') }}"
                                 class="nav-link {{ request()->is('kalender') ? 'active' : '' }}">

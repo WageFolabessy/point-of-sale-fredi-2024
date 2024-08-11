@@ -12,7 +12,12 @@
         <div class="container-fluid">
             <div class="row mb-1">
                 <div class="col-sm-6">
-                    <h1>Kelola Akun</h1>
+                    @can('admin')
+                        <h1>Kelola Akun</h1>
+                    @endcan
+                    @can('biasa')
+                        <h1>Profil Saya</h1>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -20,12 +25,14 @@
     </section>
     <section class="content">
         <div class="toastrDefaultSuccess"></div>
-        <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#modal-tambah-akun">
-            <span class="icon text-white-50">
-                <i class="fas fa-plus"></i>
-            </span>
-            <span class="text"> Tambah Akun</span>
-        </button>
+        @can('admin')
+            <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#modal-tambah-akun">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text"> Tambah Akun</span>
+            </button>
+        @endcan
         @include('components.modal-tambah-akun')
         @include('components.modal-edit-akun')
         <div class="container-fluid">
