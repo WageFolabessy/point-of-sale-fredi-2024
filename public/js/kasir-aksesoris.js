@@ -43,9 +43,10 @@ function hitungKembalian() {
 function hitungDiskon() {
     let total = parseFloat($("#totalrp").val().replace(/\D/g, "")) || 0;
     let diskon = parseFloat($("#diskon").val()) || 0;
-    let hargaBayarSetelahDiskon = total - (diskon / 100) * total;
+    let hargaBayarSetelahDiskon = total - diskon;
 
     $("#bayarrp").val(format_uang(hargaBayarSetelahDiskon));
+    $("#kembali").val(format_uang(hargaBayarSetelahDiskon));
     $(".tampil-bayar").text("Bayar: " + format_uang(hargaBayarSetelahDiskon));
 }
 
@@ -85,7 +86,7 @@ $(document).ready(function () {
             {
                 title: "Diskon",
                 render: function (data) {
-                    return data + "%";
+                    return format_uang(parseInt(data))
                 },
             },
             {

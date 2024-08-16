@@ -22,7 +22,7 @@ $("#tabelPenjualan").DataTable({
             data: "diskon",
             name: "diskon",
             render: function (data) {
-                return data + "%";
+                return format_uang(parseInt(data));
             },
         },
         {
@@ -67,7 +67,7 @@ $(document).on("click", "#tombol-detail-penjualan", function (e) {
                         <td>${detail.produk.nama_produk}</td>
                         <td>${format_uang(detail.harga_jual)}</td>
                         <td>${detail.jumlah}</td>
-                        <td>${detail.diskon}%</td>
+                        <td>${format_uang(detail.diskon)}</td>
                         <td>${format_uang(detail.subtotal)}</td>
                     </tr>
                 `;

@@ -36,7 +36,7 @@ class DetailPenjualan extends Model
         $hargaBeli = $this->produk->harga_beli;
 
         // Menghitung harga setelah diskon
-        $hargaSetelahDiskon = $this->harga_jual - ($this->harga_jual * $this->diskon / 100);
+        $hargaSetelahDiskon = $this->harga_jual - $this->diskon;
 
         // Menghitung keuntungan
         $keuntungan = ($hargaSetelahDiskon - $hargaBeli) * $this->jumlah;
@@ -53,7 +53,7 @@ class DetailPenjualan extends Model
             $hargaBeli = $model->produk->harga_beli;
 
             // Menghitung harga setelah diskon
-            $hargaSetelahDiskon = $model->harga_jual - ($model->harga_jual * $model->diskon / 100);
+            $hargaSetelahDiskon = $model->harga_jual - $model->diskon;
 
             // Menghitung keuntungan
             $keuntungan = ($hargaSetelahDiskon - $hargaBeli) * $model->jumlah;

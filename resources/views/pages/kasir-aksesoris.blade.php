@@ -122,7 +122,7 @@
                                             <div class="col-lg-8">
                                                 <input type="number" name="diskon" id="diskon" class="form-control"
                                                     value="0" onfocus="clearZero(this)" onblur="restoreZero(this)"
-                                                    oninput="hitungDiskon()">
+                                                    oninput="hitungDiskon(); formatNumber(this)">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -136,7 +136,7 @@
                                             <div class="col-lg-8">
                                                 <input type="number" id="diterima" class="form-control" name="diterima"
                                                     value="0" onfocus="clearZero(this)" onblur="restoreZero(this)"
-                                                    oninput="hitungKembalian()">
+                                                    oninput="hitungKembalian(); formatNumber(this)">
                                             </div>
                                         </div>
                                         <div class="form-group row">

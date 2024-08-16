@@ -30,6 +30,9 @@ class ProdukController extends Controller
             ->addColumn('harga_jual', function ($data) {
                 return format_uang($data->harga_jual);
             })
+            ->addColumn('diskon', function ($data) {
+                return format_uang($data->diskon);
+            })
             ->addColumn('aksi', function ($produk) {
                 return view('components.produk.tombol-aksi')->with('produk', $produk);
             })->rawColumns(['select_all'])

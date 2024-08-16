@@ -35,7 +35,7 @@
                                     <td>{{ $produk->merk }}</td>
                                     <td>{{ format_uang($produk->harga_beli) }}</td>
                                     <td>{{ format_uang($produk->harga_jual) }}</td>
-                                    <td>{{ $produk->diskon }}%</td>
+                                    <td>{{ format_uang($produk->diskon) }}</td>
                                     <td>{{ $produk->stok }}</td>
                                     <td>
                                         <a href="#"

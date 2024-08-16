@@ -26,7 +26,7 @@ class KasirAksesorisController extends Controller
             'harga' => $request->input('harga'),
             'diskon' => $request->input('diskon'),
             'jumlah' => 1,
-            'subtotal' => $request->input('harga') * 1 - ($request->input('diskon') / 100) * $request->input('harga')
+            'subtotal' => $request->input('harga') * 1 - ($request->input('diskon'))
         ];
 
         return response()->json(['product' => $product]);
@@ -39,7 +39,7 @@ class KasirAksesorisController extends Controller
         $harga = $request->input('harga');
         $diskon = $request->input('diskon');
 
-        $subtotal = $harga * $jumlah - ($diskon / 100) * $harga * $jumlah;
+        $subtotal = $harga * $jumlah - $diskon * $jumlah;
 
         return response()->json(['subtotal' => $subtotal]);
     }

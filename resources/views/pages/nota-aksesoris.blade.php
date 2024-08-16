@@ -83,7 +83,7 @@
                 <td>{{ $detail->produk->nama_produk }}</td>
                 <td class="text-right">{{ format_uang($detail->harga_jual) }}</td>
                 <td class="text-right">{{ $detail->jumlah }}</td>
-                <td class="text-right">{{ $detail->diskon }}%</td>
+                <td class="text-right">{{ format_uang($detail->diskon) }}</td>
                 <td class="text-right">{{ format_uang($detail->subtotal) }}</td>
             </tr>
             @endforeach
@@ -98,7 +98,7 @@
             </tr>
             <tr>
                 <td class="text-left">Diskon</td>
-                <td class="text-right">{{ $penjualan->diskon }}%</td>
+                <td class="text-right">{{ format_uang($penjualan->diskon) }}</td>
             </tr>
             <tr>
                 <td class="text-left">Total Bayar</td>

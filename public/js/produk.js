@@ -14,13 +14,7 @@ $("#tabelProduk").DataTable({
         { data: "merk", name: "merk" },
         { data: "harga_beli", name: "harga_beli" },
         { data: "harga_jual", name: "harga_jual" },
-        {
-            data: "diskon",
-            name: "diskon",
-            render: function (data) {
-                return data + "%";
-            },
-        },
+        { data: "diskon", name: "diskon"},
         { data: "stok", name: "stok" },
         { data: "aksi", name: "aksi", orderable: false, searchable: false },
     ],
