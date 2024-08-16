@@ -61,7 +61,7 @@
     </style>
 </head>
 <body>
-    <h1>NAMA TOKO</h1>
+    <h1>Henx's</h1>
     <h2>ALAMAT TOKO</h2>
     <p>Tanggal: {{ date('d-m-Y') }} {{ date('H:i:s') }}</p>
     <p>No: {{ str_pad($penjualan->id, 10, '0', STR_PAD_LEFT) }}</p>
