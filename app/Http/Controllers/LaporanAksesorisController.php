@@ -41,7 +41,7 @@ class LaporanAksesorisController extends Controller
                 return format_uang($data->subtotal);
             })
             ->addColumn('diskon', function ($data) {
-                return $data->diskon . '%';
+                return format_uang($data->diskon);
             })
             ->addColumn('keuntungan', function ($data) {
                 return format_uang($data->keuntungan);
