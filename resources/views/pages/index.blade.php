@@ -46,8 +46,8 @@
                         <div class="icon">
                             <i class="ion ion-cash"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer"> <i
+                                class="fas fa-none"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
