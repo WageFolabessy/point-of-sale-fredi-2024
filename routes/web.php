@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KasirAksesorisController;
 use App\Http\Controllers\KasirPulsaPaketController;
+use App\Http\Controllers\KasirServisController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanAksesorisController;
 use App\Http\Controllers\LaporanPulsaPaket;
@@ -11,6 +12,7 @@ use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TampilPenjualanController;
 use App\Models\KasirPulsaPaket;
+use App\Models\KasirServis;
 use App\Models\Penjualan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         $pulsa_paket = KasirPulsaPaket::whereDate('created_at', today())->count();
         $aksesoris = Penjualan::whereDate('created_at', today())->count();
-        $totalTransaksiHariIni = intval($pulsa_paket) + intval($aksesoris);
+        $servis = KasirServis::whereDate('created_at', today())->count();
+        $totalTransaksiHariIni = intval($pulsa_paket) + intval($aksesoris) + intval($servis);
 
         $keuntungan = DB::table('detail_penjualans')
             ->join('produks', 'detail_penjualans.id_produk', '=', 'produks.id')
@@ -58,6 +61,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kasir_pulsa_paket', function () {
         return view('pages.kasir-pulsa-paket');
     })->name('kasir_pulsa_paket');
+
+    Route::get('/kasir_servis', function () {
+        return view('pages.kasir-servis');
+    })->name('kasir_servis');
 
     Route::get('/laporan_pulsa_paket', function () {
         return view('pages.laporan-pulsa-paket');
@@ -103,6 +110,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kasir_pulsa_paket/edit_transaksi/{id}', 'edit');
         Route::post('/kasir_pulsa_paket/update_transaksi/{id}', 'update');
         Route::delete('/kasir_pulsa_paket/hapus_transaksi/{id}', 'destroy');
+    });
+
+    Route::controller(KasirServisController::class)->group(function () {
+        Route::get('/kasir_servis/datatables/', 'index');
+        Route::post('/kasir_servis/tambah_transaksi', 'store');
+        Route::get('/kasir_servis/edit_transaksi/{id}', 'edit');
+        Route::post('/kasir_servis/update_transaksi/{id}', 'update');
+        Route::delete('/kasir_servis/hapus_transaksi/{id}', 'destroy');
     });
 
     Route::controller(LaporanPulsaPaket::class)->group(function () {

@@ -27,6 +27,9 @@ class TampilPenjualanController extends Controller
             ->addColumn('waktu', function ($penjualan) {
                 return Carbon::parse($penjualan->created_at)->format('H:i:s') . ' WIB';
             })
+            ->addColumn('no_nota', function ($penjualan) {
+                return tambah_nol_didepan($penjualan->id, 10);
+            })
             ->addColumn('aksi', function ($penjualan) {
                 return view('components.penjualan.tombol-aksi')->with('penjualan', $penjualan);
             })

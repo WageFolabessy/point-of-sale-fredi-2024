@@ -36,6 +36,7 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
+                                <th>No Nota</th>
                                 <th>Total Item</th>
                                 <th>Total Harga</th>
                                 <th>Diskon</th>

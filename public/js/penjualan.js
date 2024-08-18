@@ -10,6 +10,7 @@ $("#tabelPenjualan").DataTable({
         { data: "DT_RowIndex", name: "DT_RowIndex" },
         { data: "created_at", name: "created_at" },
         { data: "waktu", name: "waktu" },
+        { data: "no_nota", name: "no_nota" },
         { data: "total_item", name: "total_item" },
         {
             data: "total_harga",
