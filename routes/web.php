@@ -7,6 +7,7 @@ use App\Http\Controllers\KasirServisController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanAksesorisController;
 use App\Http\Controllers\LaporanPulsaPaket;
+use App\Http\Controllers\LaporanServisController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\ProdukController;
@@ -41,7 +42,12 @@ Route::middleware(['auth'])->group(function () {
             ->whereDate('kasir_pulsa_pakets.created_at', today())
             ->first();
 
-        $total_keuntungan = $keuntungan->total_keuntungan + $keuntungan_pulsa_paket->total_keuntungan;
+        $keuntungan_servis = DB::table('kasir_servis_keluhans')
+            ->select(DB::raw('SUM(profit) as total_keuntungan'))
+            ->whereDate('kasir_servis_keluhans.created_at', today())
+            ->first();
+
+        $total_keuntungan = $keuntungan->total_keuntungan + $keuntungan_pulsa_paket->total_keuntungan + $keuntungan_servis->total_keuntungan;
 
         return view('pages.index', compact('totalTransaksiHariIni', 'total_keuntungan'));
     });
@@ -73,6 +79,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/laporan_aksesoris', function () {
         return view('pages.laporan-aksesoris');
     })->middleware('can:admin')->name('laporan_aksesoris');
+
+    Route::get('/laporan_servis', function () {
+        return view('pages.laporan-servis');
+    })->middleware('can:admin')->name('laporan_servis');
 
     Route::get('/kategori', function () {
         return view('pages.kategori');
@@ -130,9 +140,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan_aksesoris/pdf/{startDate}/{endDate}', 'generatePdf')->name('aksesoris_pdf');
     })->middleware('can:admin');
 
-    Route::controller(LaporanAksesorisController::class)->group(function () {
-        Route::get('/laporan_aksesoris/datatables/', 'index');
-        Route::get('/laporan_aksesoris/pdf/{startDate}/{endDate}', 'generatePdf')->name('aksesoris_pdf');
+    Route::controller(LaporanServisController::class)->group(function () {
+        Route::get('/laporan_servis/datatables/', 'index');
+        Route::get('/laporan_servis/pdf/{startDate}/{endDate}', 'generatePdf')->name('servis_pdf');
     })->middleware('can:admin');
 
     Route::controller(KategoriController::class)->group(function () {

@@ -130,9 +130,11 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Service</p>
+                                        <a href="{{ route('laporan_servis') }}"
+                                            class="nav-link {{ request()->is('laporan_servis') ? 'active' : '' }}">
+                                            <i
+                                                class="far fa-{{ request()->is('laporan_servis') ? 'dot-' : '' }}circle nav-icon"></i>
+                                            <p>Servis</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">

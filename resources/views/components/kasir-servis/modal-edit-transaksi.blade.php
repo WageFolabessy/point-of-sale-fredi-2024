@@ -55,12 +55,6 @@
                                 placeholder="Masukkan Jenis Kerusakan" aria-label="kerusakan"
                                 aria-describedby="kerusakan" />
                         </div>
-                        <div id="biayaError" class="text-danger"></div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="biaya">Biaya</span>
-                            <input name="biayaEdit" id="inputBiayaEdit" type="number" class="form-control"
-                                placeholder="Masukkan Biaya Perbaikan" aria-label="biaya" aria-describedby="biaya" />
-                        </div>
                         <div id="hargaBeliError" class="text-danger"></div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="harga_beli">Harga Beli</span>
@@ -74,6 +68,12 @@
                             <input name="harga_jualEdit" id="inputHargaJualEdit" type="number" class="form-control"
                                 placeholder="Masukan Harga Jual" aria-label="harga_jual"
                                 aria-describedby="harga_jual" />
+                        </div>
+                        <div id="biayaError" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="biaya">Biaya</span>
+                            <input name="biayaEdit" id="inputBiayaEdit" type="number" class="form-control"
+                                placeholder="Masukkan Biaya Perbaikan" aria-label="biaya" aria-describedby="biaya" />
                         </div>
                     </div>
                     <button class="btn btn-primary mb-3 w-100" id="addKerusakanEdit" type="button">

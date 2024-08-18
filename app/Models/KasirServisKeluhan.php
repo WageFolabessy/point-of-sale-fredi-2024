@@ -14,7 +14,7 @@ class KasirServisKeluhan extends Model
         parent::boot();
 
         static::saving(function ($model) {
-            $model->profit = $model->harga_jual - $model->harga_beli;
+            $model->profit = $model->harga_jual - ($model->harga_beli + $model->biaya);
         });
     }
 

@@ -37,7 +37,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="status">Status</span>
                         <select class="form-control form-select" id="inputStatus" name="inputStatus">
-                            <option disabled selected>Pilih Status...</option>
+                            <option disabled selected value="-1" >Pilih Status...</option>
                             <option value="0">Belum Selesai</option>
                             <option value="1">Selesai</option>
                         </select>
@@ -55,12 +55,6 @@
                                 placeholder="Masukkan Jenis Kerusakan" aria-label="kerusakan"
                                 aria-describedby="kerusakan" />
                         </div>
-                        <div id="biayaError" class="text-danger"></div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="biaya">Biaya</span>
-                            <input name="biaya" id="inputBiaya" type="number" class="form-control"
-                                placeholder="Masukkan Biaya Perbaikan" aria-label="biaya" aria-describedby="biaya" />
-                        </div>
                         <div id="hargaBeliError" class="text-danger"></div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="harga_beli">Harga Beli</span>
@@ -74,6 +68,12 @@
                             <input name="harga_jual" id="inputHargaJual" type="number" class="form-control"
                                 placeholder="Masukan Harga Jual" aria-label="harga_jual"
                                 aria-describedby="harga_jual" />
+                        </div>
+                        <div id="biayaError" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="biaya">Biaya</span>
+                            <input name="biaya" id="inputBiaya" type="number" class="form-control"
+                                placeholder="Masukkan Biaya Perbaikan" aria-label="biaya" aria-describedby="biaya" />
                         </div>
                     </div>
                     <button class="btn btn-primary mb-3 w-100" id="addKerusakan" type="button">

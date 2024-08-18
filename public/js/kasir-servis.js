@@ -70,6 +70,8 @@ $(document).on("click", "#tambah-transaksi", function (e) {
             });
 
             clearForm();
+            clearTable();
+            tampilSembunyiTabel();
             console.log(ambilDataTabel());
 
             $("#tabelKasirServis").DataTable().ajax.reload();
@@ -277,15 +279,22 @@ function updateTransaksi(id) {
 }
 
 function clearForm() {
-    $("input[name=nomor_hp]").val("");
+    $("input[name=nama]").val("");
+    $("input[name=no_hp]").val("");
+    $("input[name=jenis_hp]").val("");
+    $("input[name=no_imei]").val("");
+    $("#inputStatus").val("-1");
+
+    $("input[name=kerusakan]").val("");
     $("input[name=harga_beli]").val("");
     $("input[name=harga_jual]").val("");
-    $("textarea[name=keterangan]").val("");
+    $("input[name=biaya]").val("");
 
-    $("#nomorHPErrorEdit").text("");
-    $("#hargaBeliErrorEdit").text("");
-    $("#hargaJualErrorEdit").text("");
-    $("#keteranganErrorEdit").text("");
+    $("#namaError").text("");
+    $("#noHpError").text("");
+    $("#jenisHpError").text("");
+    $("#nomorImeiError").text("");
+    $("#statusError").text("");
 }
 
 function clearError() {
