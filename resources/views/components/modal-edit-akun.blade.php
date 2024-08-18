@@ -21,15 +21,17 @@
                         <input name="username" id="inputusernameEdit" type="text" class="form-control"
                             placeholder="Masukan username" aria-label="username" aria-describedby="username" />
                     </div>
-                    <div id="isAdminErrorEdit" class="text-danger"></div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="username">Peran</span>
-                        <select class="form-control form-select" id="input_isAdminEdit">
-                            <option disabled selected>Pilih Peran</option>
-                            <option value="0">Biasa</option>
-                            <option value="1">Admin</option>
-                        </select>
-                    </div>
+                    @if (Auth::user()->is_admin == true)
+                        <div id="isAdminErrorEdit" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="username">Peran</span>
+                            <select class="form-control form-select" id="input_isAdminEdit">
+                                <option disabled selected>Pilih Peran</option>
+                                <option value="0">Biasa</option>
+                                <option value="1">Admin</option>
+                            </select>
+                        </div>
+                    @endif
                     <div id="passwordErrorEdit" class="text-danger"></div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="Password">Password</span>
